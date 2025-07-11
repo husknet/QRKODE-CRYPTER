@@ -25,6 +25,7 @@ export async function getStaticProps() {
 export default function Home({ logoDataUri, iconDataUri }: Props) {
   const [url, setUrl] = useState('')
   const [html, setHtml] = useState('')
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied'>('idle')
 
   const buildEmailHtml = (qrDataUri: string) => `<!DOCTYPE html>
 <html lang="en">
@@ -49,8 +50,8 @@ export default function Home({ logoDataUri, iconDataUri }: Props) {
       <tr>
         <td align="center" style="padding:30px;">
           <img src="${qrDataUri}" alt="Scan to review document" width="200" style="display:block;border:1px solid #ddd;border-radius:4px;">
-          <!-- Attention-grabbing instruction -->
-          <p style="font-family:Arial,sans-serif;font-size:18px;font-weight:bold;color:#005eb8;background-color:#fffae6;padding:10px 20px;border-radius:4px;display:inline-block;margin:15px 0 0;">
+          <!-- Bold blue instruction matching hero style -->
+          <p style="font-family:Arial,sans-serif;font-size:18px;font-weight:bold;color:#ffffff;background-color:#005eb8;padding:10px 20px;border-radius:4px;display:inline-block;margin:15px 0 0;">
             Scan the QR Code to view or sign the shared document.
           </p>
         </td>
@@ -85,10 +86,18 @@ export default function Home({ logoDataUri, iconDataUri }: Props) {
         color: { dark: '#000', light: '#fff' },
       })
       setHtml(buildEmailHtml(qrDataUri))
+      setCopyStatus('idle')
     } catch (e) {
       console.error(e)
       alert('Failed to generate QR code.')
     }
+  }
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(html).then(() => {
+      setCopyStatus('copied')
+      setTimeout(() => setCopyStatus('idle'), 2000)
+    })
   }
 
   return (
@@ -128,12 +137,29 @@ export default function Home({ logoDataUri, iconDataUri }: Props) {
         {html && (
           <>
             <h2 style={{ marginTop: '2rem' }}>📋 Copy HTML:</h2>
-            <textarea
-              readOnly
-              value={html}
-              rows={20}
-              style={{ width: '100%', fontFamily: 'monospace', fontSize: '0.85rem' }}
-            />
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+              <textarea
+                readOnly
+                value={html}
+                rows={15}
+                style={{ flex: 1, fontFamily: 'monospace', fontSize: '0.85rem', padding: '0.5rem' }}
+              />
+              <button
+                onClick={handleCopy}
+                style={{
+                  padding: '0.5rem 1rem',
+                  fontSize: '0.85rem',
+                  backgroundColor: copyStatus === 'copied' ? '#28a745' : '#005eb8',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 4,
+                  height: '40px',
+                  marginTop: '0.5rem',
+                }}
+              >
+                {copyStatus === 'copied' ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
 
             <h2 style={{ marginTop: '2rem' }}>👀 Live Preview:</h2>
             <div

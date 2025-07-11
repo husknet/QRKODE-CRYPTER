@@ -49,7 +49,8 @@ export default function Home({ logoDataUri, iconDataUri }: Props) {
       <tr>
         <td align="center" style="padding:30px;">
           <img src="${qrDataUri}" alt="Scan to review document" width="200" style="display:block;border:1px solid #ddd;border-radius:4px;">
-          <p style="font-family:Arial,sans-serif;font-size:14px;color:#333;margin:15px 0 0;">
+          <!-- Attention-grabbing instruction -->
+          <p style="font-family:Arial,sans-serif;font-size:18px;font-weight:bold;color:#005eb8;background-color:#fffae6;padding:10px 20px;border-radius:4px;display:inline-block;margin:15px 0 0;">
             Scan the QR Code to view or sign the shared document.
           </p>
         </td>

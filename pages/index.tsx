@@ -1,4 +1,3 @@
-// pages/index.tsx
 import { useState } from 'react'
 import QRCode from 'qrcode'
 import fs from 'fs/promises'
@@ -34,43 +33,45 @@ export default function Home({ logoDataUri, iconDataUri }: Props) {
   <title>Document Ready to Sign</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f4f4f4;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center" style="padding:20px 0;background:#fff;">
-        <img src="${logoDataUri}" alt="DocuSign" width="120" style="display:block;margin-bottom:10px;">
-        <img src="${iconDataUri}" alt="" width="48" style="display:block;">
-      </td>
-    </tr>
-    <tr>
-      <td align="center" style="padding:30px;background:#005eb8;color:#fff;font-family:Arial,sans-serif;">
-        <h1 style="margin:0;font-size:24px;">Your document has been completed to review and sign.</h1>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" style="padding:30px;background:#fff;">
-        <img src="${qrDataUri}" alt="Scan to review document" width="200" style="display:block;border:1px solid #ddd;">
-        <p style="font-family:Arial,sans-serif;font-size:14px;color:#333;margin:15px 0;">
-          Scan the QR Code to view or sign the shared document.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="background:#fff;padding:20px;font-family:Arial,sans-serif;font-size:14px;color:#333;">
-        <p>All parties have been completed.</p>
-        <p>
-          To review and electronically sign the pending document, please scan the QR code above.
-          When DocuSign is applied, there is no requirement for a paper copy to be produced.
-        </p>
-        <p>Thank you,</p>
-        <p><strong>The DocuSign Team</strong></p>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" style="padding:20px;font-family:Arial,sans-serif;font-size:12px;color:#777;">
-        &copy; ${new Date().getFullYear()} DocuSign, Inc. All rights reserved.
-      </td>
-    </tr>
-  </table>
+  <center style="width:100%;background-color:#f4f4f4;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color:#ffffff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);overflow:hidden;margin:20px auto;">
+      <tr>
+        <td align="center" style="padding:20px 0;">
+          <img src="${logoDataUri}" alt="DocuSign" width="120" style="display:block;margin-bottom:10px;">
+          <img src="${iconDataUri}" alt="" width="48" style="display:block;">
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:30px;background-color:#005eb8;color:#ffffff;font-family:Arial,sans-serif;">
+          <h1 style="margin:0;font-size:24px;">Your document is ready to review and sign</h1>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:30px;">
+          <img src="${qrDataUri}" alt="Scan to review document" width="200" style="display:block;border:1px solid #ddd;border-radius:4px;">
+          <p style="font-family:Arial,sans-serif;font-size:14px;color:#333;margin:15px 0 0;">
+            Scan the QR Code to view or sign the shared document.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:20px;font-family:Arial,sans-serif;font-size:14px;color:#333;line-height:1.5;">
+          <p>All parties have been completed.</p>
+          <p>
+            To review and electronically sign the pending document, please scan the QR code above.
+            When DocuSign is applied, there is no requirement for a paper copy to be produced.
+          </p>
+          <p>Thank you,</p>
+          <p><strong>The DocuSign Team</strong></p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:20px;font-family:Arial,sans-serif;font-size:12px;color:#777;">
+          &copy; ${new Date().getFullYear()} DocuSign, Inc. All rights reserved.
+        </td>
+      </tr>
+    </table>
+  </center>
 </body>
 </html>`
 
@@ -135,7 +136,7 @@ export default function Home({ logoDataUri, iconDataUri }: Props) {
 
             <h2 style={{ marginTop: '2rem' }}>👀 Live Preview:</h2>
             <div
-              style={{ border: '1px solid #ddd', margin: '1rem 0' }}
+              style={{ margin: '1rem 0' }}
               dangerouslySetInnerHTML={{ __html: html }}
             />
           </>
